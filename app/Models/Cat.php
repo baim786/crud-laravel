@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
+
+class Cat extends Model
+{
+    use HasFactory;
+    protected $primaryKey = 'cat_id';
+    protected $fillable = ['name', 'date_of_birth'];
+    public $timestamps = false;
+
+    public function setDateOfBirthAttribute($value)
+    {
+
+        $this->attributes['date_of_birth'] = Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
+    }
+}
